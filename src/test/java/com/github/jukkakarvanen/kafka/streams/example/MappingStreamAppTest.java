@@ -15,10 +15,6 @@
  */
 package com.github.jukkakarvanen.kafka.streams.example;
 
-import com.github.jukkakarvanen.kafka.streams.test.TestInputTopic;
-import com.github.jukkakarvanen.kafka.streams.test.TestOutputTopic;
-import com.github.jukkakarvanen.kafka.streams.test.TestRecord;
-import com.github.jukkakarvanen.kafka.streams.test.TopologyTestDriver;
 import org.apache.kafka.common.header.Header;
 import org.apache.kafka.common.header.Headers;
 import org.apache.kafka.common.header.internals.RecordHeader;
@@ -29,9 +25,13 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsBuilder;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.apache.kafka.streams.TestInputTopic;
+import org.apache.kafka.streams.TestOutputTopic;
+import org.apache.kafka.streams.TopologyTestDriver;
+import org.apache.kafka.streams.test.TestRecord;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -55,7 +55,7 @@ public class MappingStreamAppTest {
     private final Instant recordBaseTime = Instant.parse("2019-06-01T10:00:00Z");
     private final Duration advance1Min = Duration.ofMinutes(1);
 
-    @Before
+    @BeforeEach
     public void setup() {
         final StreamsBuilder builder = new StreamsBuilder();
         //Create Actual Stream Processing pipeline
@@ -66,7 +66,7 @@ public class MappingStreamAppTest {
         outputTopic = testDriver.createOutputTopic(MappingStreamApp.OUTPUT_TOPIC, new StringDeserializer(), new LongDeserializer());
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         try {
             testDriver.close();
@@ -89,11 +89,12 @@ public class MappingStreamAppTest {
 
     @Test
     public void testReadFromEmptyTopic() {
+        inputTopic.pipeInput(9L, "Hello");
+        assertThat(outputTopic.readValue()).isEqualTo(9L);
         //Reading from empty topic generate Exception
         assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() -> {
             outputTopic.readValue();
-        })
-                .withMessage("Empty topic: %s", MappingStreamApp.OUTPUT_TOPIC);
+        }).withMessage("Empty topic: %s", MappingStreamApp.OUTPUT_TOPIC);
     }
 
     @Test

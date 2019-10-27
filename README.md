@@ -71,9 +71,12 @@ Additionally, now the reading from non-existing topic is causing exception inste
 
     @Test
     public void testReadFromEmptyTopic() {
+        inputTopic.pipeInput(9L, "Hello");
+        assertThat(outputTopic.readValue()).isEqualTo(9L);    
         //Reading from empty topic generate Exception
-        assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() -> { outputTopic.readValue(); })
-                .withMessage("Empty topic: %s", MappingStreamApp.OUTPUT_TOPIC);
+        assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() -> {
+            outputTopic.readValue();
+        }).withMessage("Empty topic: %s", MappingStreamApp.OUTPUT_TOPIC);
     }
 
 ### Testing KeyValue
