@@ -219,4 +219,6 @@ Happy testing.
 
 ## Author 
 
-Questions and feedback jukka@jukinimi.com
+Jukka Karvanen / jukka@jukinimi.com
+
+Questions and feedback welcome. 
