@@ -216,3 +216,7 @@ used with older versions by modifying only the package import. See more info: ht
 * [TestTopicsTest.java](https://github.com/apache/kafka/blob/trunk/streams/test-utils/src/test/java/org/apache/kafka/streams/TestTopicsTest.java) 
 
 Happy testing.
+
+## Author 
+
+Questions and feedback jukka@jukinimi.com
