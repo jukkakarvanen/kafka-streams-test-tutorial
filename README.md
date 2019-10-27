@@ -194,7 +194,8 @@ contains keys with the null value.
                 .containsEntry("c", 3L);
     }
 
-The full example code can be found [here](src/test/java/com/github/jukkakarvanen/kafka/streams/example/MappingStreamAppTest.java).
+The full example code can be found [here](src/test/java/com/github/jukkakarvanen/kafka/streams/example/MappingStreamAppTest.java)
+with related example [pom.xml](pom.xml).
 
 ## Migration
 
