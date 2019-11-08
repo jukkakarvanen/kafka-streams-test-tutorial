@@ -4,6 +4,8 @@ Testing example related to  [KIP-470](https://cwiki.apache.org/confluence/displa
 
 See also  [Kafka Streams - Developer Guide](https://kafka.apache.org/documentation/streams/developer-guide/testing.html).
 
+## kafka-streams-test-topics package
+
 If you want to use these topic classes with older Kafka versions, there is a separate package which can be
 used with older versions by modifying only the package import. See more info: https://github.com/jukkakarvanen/kafka-streams-test-topics 
 
