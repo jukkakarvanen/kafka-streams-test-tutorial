@@ -150,10 +150,10 @@ public class MappingStreamAppTest {
         final List<KeyValue<Long, String>> input = new LinkedList<>();
         final List<TestRecord<String, Long>> expected = new LinkedList<>();
         long i = 1;
-        Instant recordTime = Instant.parse("2019-06-01T10:00:00Z");
+        Instant recordTime = recordBaseTime;
         for (final String s : inputList) {
             input.add(new KeyValue<>(i, s));
-            //Excepted entries have key and value swapped and recordTime advancing 1 minute in each
+            //Expected entries have key and value swapped and recordTime advancing 1 minute in each
             expected.add(new TestRecord<>(s, i++, recordTime));
             recordTime = recordTime.plus(advance1Min);
             i++;
